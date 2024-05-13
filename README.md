@@ -1,66 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<p align="center" >
+  <b>POINT UTAMA</b>
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> #### INSTALASI
+> - PHP 8.1.0
+> - LARAVEL 10.0.3
+>   ```
+>   Composer Create-project laravel\laravel=v10.0.3 laravel-validation
+>   ```
+---
+> #### APA ITU VALIDATION
+> - Validasi di Laravel adalah proses memastikan data yang dimasukkan ke dalam aplikasi web Anda aman dan sesuai dengan yang diharapkan.
+> #### Manfaat
+> - Meningkatkan keamanan aplikasi
+> - Memastikan data yang konsisten
+> - Mempermudah pengembangan aplikasi
+> - Menampilkan pesan error yang informatif
+---
+> #### VALIDATOR
+> - `Validator` dalam Laravel adalah kelas yang digunakan untuk memvalidasi data. Dengan `Validator`, Anda bisa menentukan aturan validasi, seperti memastikan bahwa input adalah string, panjangnya tidak melebihi batas tertentu, atau memenuhi format email.
+> - Contoh sintaksnya :
+> ```
+> $validator = Validator::make($data, $rules);
+>
+> if ($validator->fails()) {
+>    // Tangani kesalahan jika validasi gagal
+> } else {
+>    // Lakukan tindakan jika validasi berhasil
+> }
+> ```
+> -Dalam contoh ini, `$data` adalah data yang ingin divalidasi, dan $rules adalah aturan validasi yang ditentukan. Jika validasi gagal, Anda bisa menangani kesalahan tersebut; jika tidak, 
+---
+> #### ERROR MESSAGE
+> - Error Message dalam Laravel adalah pesan yang memberi tahu pengguna tentang kesalahan dalam input yang mereka berikan. Ini muncul ketika validasi data gagal, membantu pengguna memahami masalahnya. Misalnya, "Email harus berupa alamat email yang valid." pesan kesalahan memberi tahu pengguna bahwa mereka harus memasukkan alamat email yang benar.
+---
+> #### VALIDATION EXCEPTION
+> - `ValidationException` dalam Laravel adalah pengecualian yang dilemparkan ketika validasi data gagal. Ketika Anda memvalidasi data dan ada kesalahan, Laravel secara otomatis melemparkan pengecualian ini. Anda dapat menangkapnya dalam kontroler atau bagian lain dari kode Anda untuk menangani kesalahan validasi dan memberikan respons yang sesuai kepada pengguna.
+> - Contoh sintaksnya:
+>```
+>use Illuminate\Validation\ValidationException;
+>
+>try {
+>    // Lakukan validasi data di sini
+>} catch (ValidationException $e) {
+>    // Tangani pengecualian validasi di sini
+>    $errors = $e->validator->errors()->all();
+>    return response()->json(['errors' => $errors], 422);
+>}
+>```
+> - Dalam blok `catch`, kita menangkap `ValidationException` dan kemudian dapat melakukan apa pun yang diperlukan, seperti mengambil pesan kesalahan validasi dari objek validator dan mengembalikannya kepada
+pengguna dalam bentuk yang sesuai. Hal ini memungkinkan aplikasi Anda untuk memberikan umpan balik yang tepat kepada pengguna ketika terjadi kesalahan validasi.
+---
+> #### VALIDATION RULES
+> - Aturan validasi dalam Laravel adalah kumpulan aturan yang digunakan untuk memeriksa data yang dimasukkan oleh pengguna. Ini termasuk memastikan data tidak kosong (`required`), adalah alamat email yang valid (`email`), merupakan bilangan (`numeric`), dll. Anda bisa menggunakan aturan ini untuk memvalidasi input dengan cepat dan tepat.
+---
+> #### VALID DATA
+> - Data yang valid adalah data yang sesuai dengan aturan validasi yang telah ditetapkan. Dalam konteks Laravel, ini berarti data yang memenuhi semua aturan validasi yang telah didefinisikan, seperti tidak kosong (required), memiliki format yang benar (misalnya, alamat email yang valid), atau memenuhi batasan tertentu (misalnya, panjang string minimum). Jadi, data yang valid adalah data yang lolos semua pengujian validasi yang telah ditetapkan untuk itu.
+---
+> #### VALIDATION MESSAGE
+> - Validation Message adalah pesan yang memberitahu pengguna tentang kesalahan yang terjadi saat validasi data. Ketika data yang dimasukkan pengguna tidak memenuhi aturan validasi yang telah ditetapkan, pesan validasi memberikan informasi tentang kesalahan tersebut. Pesan ini membantu pengguna memahami masalahnya dan dapat membimbing mereka untuk memperbaiki input mereka. Pesan validasi yang baik biasanya jelas dan informatif, memberikan petunjuk yang berguna kepada pengguna tentang apa yang salah dengan data yang mereka masukkan.
+---
+> #### ADDTIONAL VALIDATION
+> - Validasi tambahan adalah langkah-langkah validasi ekstra yang Anda terapkan untuk memeriksa data lebih lanjut setelah validasi standar. Ini bisa termasuk pengujian spesifik untuk kasus penggunaan tertentu atau memverifikasi data melawan layanan eksternal. Validasi tambahan membantu memastikan bahwa data yang dimasukkan memenuhi persyaratan lebih lanjut sesuai dengan kebutuhan aplikasi Anda.
+---
+> #### CUSTOM RULE
+> - Anda bisa membuat aturan validasi kustom dengan Laravel. Berikut langkahnya:
+>> 1. Gunakan perintah artisan untuk membuat aturan baru:
+>>```
+>>php artisan make:rule CustomRule
+>>```
+>> 2. Di dalam file yang baru dibuat (CustomRule.php), tentukan logika validasi di dalam metode `passes`.
+>>```
+>>public function passes($attribute, $value)
+>>{
+>>    // Logika validasi Anda di sini
+>>}
+>>```
+>> 3. Definisikan pesan kesalahan dalam metode `message`.
+>> ```
+>> public function message()
+>>{
+>>    return 'Pesan kesalahan kustom Anda di sini.';
+>>}
+>> ```
+>>  4. Gunakan aturan validasi kustom Anda dalam validasi Anda seperti aturan validasi bawaan lainnya.
+>> ```
+>> $request->validate([
+>>    'field' => ['required', new CustomRule],
+>>]);
+>>```
+---
+> #### RULE CLASSES
+> - Rule classes dalam Laravel adalah kelas yang menerapkan aturan validasi khusus. Dengan membuat rule class, Anda bisa memisahkan logika validasi dari kontroler, meningkatkan keterbacaan kode. Langkahnya: buat rule class, tentukan logika validasi dalam metode `passes`, definisikan pesan kesalahan dalam metode `message`, lalu gunakan rule class tersebut dalam validasi seperti aturan bawaan.
+---
+> #### NESTED ARRAY VALIDATION
+> - Anda bisa memvalidasi array bersarang dalam Laravel dengan menggunakan sintaks seperti ini:
+> ```
+> $request->validate([
+>    'users.*.name' => 'required|string',
+>    'users.*.email' => 'required|email',
+>    'users.*.age' => 'required|integer|min:18',
+>]);
+>```
+> - Dalam contoh ini, kita memvalidasi setiap elemen dalam array `users`, memastikan bahwa setiap pengguna memiliki nama, email, dan usia yang sesuai dengan aturan validasi yang ditetapkan.
+---
+> #### HTTP REQUEST VALIDATION
+> - Validasi permintaan HTTP dalam Laravel memungkinkan Anda untuk memverifikasi data yang dikirim oleh pengguna melalui permintaan HTTP, seperti formulir web atau permintaan API.
+>> 1. Berikut salah satu contoh request validation :
+>> ```
+>> public function rules()
+>>{
+>>    return [
+>>        'title' => 'required|string|max:255',
+>>        'content' => 'required|string',
+>>        'tags' => 'nullable|array',
+>>        'tags.*' => 'string|max:50',
+>>    ];
+>> }
+>> ```
+---
+<p align="center" >
+  <b>PERTANYAAN DAN CATATAN TAMBAHAN</b>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> - 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+<p align="center" >
+  <b>KESIMPULAN</b>
+</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> - Laravel Validation adalah sebuah fitur yang sangat berguna dalam pengembangan aplikasi web menggunakan framework Laravel. Dengan Laravel Validation, pengembang dapat dengan mudah menentukan aturan validasi untuk setiap input yang diterima dari pengguna, sehingga memastikan bahwa data yang disubmit sesuai dengan kebutuhan aplikasi dan aman dari serangan. Fitur ini memungkinkan penggunaan aturan validasi bawaan yang kuat serta kemampuan untuk membuat aturan validasi kustom sesuai dengan kebutuhan proyek, memberikan fleksibilitas dan kontrol yang besar dalam memvalidasi data. Dengan demikian, Laravel Validation mempercepat proses pengembangan, meningkatkan keamanan aplikasi, dan memastikan kualitas data yang diolah.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
